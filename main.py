@@ -27,7 +27,10 @@ def echo(args):
     '''
     this function prints echo output to stdout
     '''
-    print(" ".join(args))
+    if len(args) == 1 and args[0][0] == "$":
+        print(os.getenv(args[0][1:]))
+    else:
+        print(" ".join(args))
 
 def change_dir(directory):
     '''

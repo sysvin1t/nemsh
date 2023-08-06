@@ -57,7 +57,7 @@ def sh_loop():
     main function
     '''
     while True:
-        command = input(f"{os.getcwd()} $ ")
+        command = input(f"\x1b[32m{os.getcwd()}\x1b[0m $ ")
         if not command:
             continue
         args = command.split()

@@ -51,8 +51,16 @@ def sh_loop():
             continue
         args = command.split()
 
-        if args[0] == "exit":
+        if len(args) == 1 and args[0] == "exit":
             sys.exit()
+        elif len(args) == 2 and args[0] == "exit":
+            try:
+                if int(args[1]) > 255:
+                    print("[e] exit codes are between 0-255")
+                else:
+                    sys.exit(args[1])
+            except ValueError:
+                print("[e] exit code expected to be int")
         elif args[0] == "cd":
             change_dir(args[1:])
         elif args[0] == "echo":

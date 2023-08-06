@@ -43,6 +43,14 @@ def change_dir(directory):
     except IndexError:
         print("Usage: cd <directory>")
 
+def export_var():
+    '''
+    this function adds environment variable
+    '''
+    var_name = input("\x1b[32m>\x1b[0m variable name: ")
+    var_val = input("\x1b[32m>\x1b[0m value: ")
+    os.environ[var_name] = var_val
+        
 # shell loop
 def sh_loop():
     '''
@@ -68,6 +76,8 @@ def sh_loop():
             change_dir(args[1:])
         elif args[0] == "echo":
             echo(args[1:])
+        elif args[0] == "export":
+            export_var()
         else:
             exec_cmd(command)
 

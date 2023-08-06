@@ -13,7 +13,10 @@ def exec_cmd(command):
     this function executes command of nemsh
     '''
     try:
-        subprocess.run(command,check=True)
+        if len(command.split()) == 1:
+            subprocess.run(command,check=True)
+        else:
+            subprocess.run(command.split(), check=True)
     except subprocess.CalledProcessError as err:
         print(f"[e]: {err}")
     except FileNotFoundError:
@@ -32,7 +35,7 @@ def change_dir(directory):
     '''
     try:
         os.chdir(directory[0])
-    except FileNotFoundError:
+    except (NotADirectoryError, FileNotFoundError):
         print("[e] No such file or directory, make sure you did not misspell")
     except IndexError:
         print("Usage: cd <directory>")

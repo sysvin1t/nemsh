@@ -57,7 +57,7 @@ def sh_loop():
     main function
     '''
     while True:
-        command = input(f"\x1b[32m{os.getcwd()}\x1b[0m $ ")
+        command = input(f"\x1b[32m{os.getcwd()}\x1b[0m ({os.getlogin()}@{os.uname()[1]}) $ ")
         if not command:
             continue
         args = command.split()

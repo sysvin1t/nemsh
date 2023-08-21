@@ -82,4 +82,11 @@ def sh_loop():
             exec_cmd(command)
 
 if __name__ == "__main__":
+    try:
+        sys.path.append(f"/home/{os.getlogin()}/.config/nemsh/")
+        import rc
+        rc.main()
+    except Exception:
+        # pass because user may not have the rc file (it is not necessary to have one)
+        pass
     sh_loop()

@@ -10,17 +10,17 @@ import sys
 # executing NOT built-in commands
 def exec_cmd(command):
     '''
-    this function executes command of nemsh
+    this function execute every other command (that isn't implemented to nemsh)
     '''
     try:
         if len(command.split()) == 1:
-            subprocess.run(command,check=True)
+            subprocess.run(command, check=True)
         else:
             subprocess.run(command.split(), check=True)
     except subprocess.CalledProcessError as err:
-        print(f"[e]: {err}")
+        print(f"[error]: {err}")
     except FileNotFoundError:
-        print(f"[e]: command not found. ({command})")
+        print(f"[error: command not found. ({command})")
 
 # implementing simple shell commands (echo, cd, improved ls)
 def echo(args):
@@ -34,18 +34,18 @@ def echo(args):
 
 def change_dir(directory):
     '''
-    this is a cd equivalent of nemsh
+    this is nemsh's cd implementation
     '''
     try:
         os.chdir(directory[0])
     except (NotADirectoryError, FileNotFoundError):
-        print("[e] No such file or directory, make sure you did not misspell")
+        print("[error] No such file or directory.")
     except IndexError:
         print("Usage: cd <directory>")
 
 def export_var():
     '''
-    this function adds environment variable
+    this function adds environment variables support
     '''
     var_name = input("\x1b[32m>\x1b[0m variable name: ")
     var_val = input("\x1b[32m>\x1b[0m value: ")
@@ -54,7 +54,7 @@ def export_var():
 # shell loop
 def sh_loop():
     '''
-    main function
+    the shell loop
     '''
     while True:
         command = input(f"\x1b[32m{os.getcwd()}\x1b[0m ({os.getlogin()}@{os.uname()[1]}) $ ")

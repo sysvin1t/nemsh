@@ -17,10 +17,10 @@ def exec_cmd(command):
             subprocess.run(command, check=True)
         else:
             subprocess.run(command.split(), check=True)
-    except subprocess.CalledProcessError as err:
-        print(f"[error]: {err}")
+    except subprocess.CalledProcessError as e:
+        print(f"=> [error]: {e}.")
     except FileNotFoundError:
-        print(f"[error: command not found. ({command})")
+        print(f"=> [error]: Command not found. ({command})")
 
 # implementing simple shell commands (echo, cd, improved ls)
 def echo(args):
@@ -39,9 +39,9 @@ def change_dir(directory):
     try:
         os.chdir(directory[0])
     except (NotADirectoryError, FileNotFoundError):
-        print("[error] No such file or directory.")
+        print("=> [error] No such file or directory.")
     except IndexError:
-        print("Usage: cd <directory>")
+        print("=> Usage: cd <directory>.")
 
 def export_var():
     '''
@@ -67,11 +67,11 @@ def sh_loop():
         elif len(args) == 2 and args[0] == "exit":
             try:
                 if int(args[1]) > 255:
-                    print("[e] exit codes are between 0-255")
+                    print("=> [error] Avialable exit codes are in range from 0 to 255")
                 else:
                     sys.exit(args[1])
             except ValueError:
-                print("[e] exit code expected to be int")
+                print("[e] Exit code expected to be an integer.")
         elif args[0] == "cd":
             change_dir(args[1:])
         elif args[0] == "echo":

@@ -7,6 +7,9 @@ import subprocess
 import os
 import sys
 
+
+alias_table = {} # note: here aliases are stored right now
+
 # executing NOT built-in commands
 def exec_cmd(command):
     '''
@@ -50,7 +53,17 @@ def export_var():
     var_name = input("\x1b[32m>\x1b[0m variable name: ")
     var_val = input("\x1b[32m>\x1b[0m value: ")
     os.environ[var_name] = var_val
-        
+
+def alias():
+    '''
+    this function adds alias to nemsh
+    '''
+    global alias_table
+
+    alias_name = input("\x1b[32m>\x1b[0m name: ")
+    alias_val = input("\x1b[32m>\x1b[0m value: ")
+    alias_table[alias_name] = alias_val
+
 # shell loop
 def sh_loop():
     '''
@@ -78,6 +91,10 @@ def sh_loop():
             echo(args[1:])
         elif args[0] == "export":
             export_var()
+        elif args[0] == "alias":
+            alias()
+        elif args[0] in list(alias_table.keys()):
+            exec_cmd(alias_table[args[0]])
         else:
             exec_cmd(command)
 

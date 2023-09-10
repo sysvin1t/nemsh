@@ -4,7 +4,9 @@
 ![](https://img.shields.io/github/license/l0ldev/nemsh)
 ![](https://shields.io/github/stars/l0ldev/nemsh)
 
+<p align="center">
 <img alt="commit activity" src=https://img.shields.io/github/commit-activity/w/L0Ldev/nemsh?style=for-the-badge />
+</p>
 
 <h3>nemsh - interactive Linux Shell for NemesisOS written in pure Python from scratch.</h3>
 <h3>It can be used on any Linux distribution though (currently in development, and is unstable)

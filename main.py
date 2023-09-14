@@ -40,14 +40,14 @@ def change_dir(directory):
     this is nemsh's cd implementation
     '''
     if not directory:
-        directory = f"/home/{os.getlogin()}"
-        os.chdir(directory)
-    try:
-        os.chdir(directory[0])
-    except (NotADirectoryError, FileNotFoundError):
-        print("=> [error] No such file or directory.")
-    except IndexError:
-        print("=> Usage: cd <directory>.")
+        os.chdir(f"/home/{os.getlogin()}")
+    else:
+        try:
+            os.chdir(directory[0])
+        except (NotADirectoryError, FileNotFoundError):
+            print("=> [error] No such file or directory.")
+        except IndexError:
+            print("=> Usage: cd <directory>.")
 
 def export_var():
     '''

@@ -39,6 +39,9 @@ def change_dir(directory):
     '''
     this is nemsh's cd implementation
     '''
+    if not directory:
+        directory = f"/home/{os.getlogin()}"
+        os.chdir(directory)
     try:
         os.chdir(directory[0])
     except (NotADirectoryError, FileNotFoundError):

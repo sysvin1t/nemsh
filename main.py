@@ -10,6 +10,8 @@ import sys
 
 alias_table = {} # note: here aliases are stored right now
 
+PS1 = False # note: don't touch this
+
 # executing NOT built-in commands
 def exec_cmd(command):
     '''
@@ -72,8 +74,12 @@ def sh_loop():
     '''
     the shell loop
     '''
+    global PS1
+
+    if not PS1:
+         PS1 = f"\x1b[32m{os.getcwd()}\x1b[0m ({os.getlogin()}@{os.uname()[1]}) $ "
     while True:
-        command = input(f"\x1b[32m{os.getcwd()}\x1b[0m ({os.getlogin()}@{os.uname()[1]}) $ ")
+        command = input(PS1)
         if not command:
             continue
         args = command.split()
@@ -105,6 +111,7 @@ if __name__ == "__main__":
     try:
         sys.path.append(f"/home/{os.getlogin()}/.config/nemsh/")
         import rc
+        PS1 = rc.PS1
         rc.main()
     except Exception:
         # pass because user may not have the rc file (it is not necessary to have one)
